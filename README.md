@@ -29,14 +29,25 @@
 > * run the **streamlit run main.py** file and run the application
 
 ## **Web Interface**
+### **Application UI**
 #### Home Page
 ![Home Page](https://github.com/Adi-Narayana-Madapakula/Human-Gender-Tracking-Application/blob/main/application_ui/home.png)
+#### Phases - Input
+![Phases](https://github.com/Adi-Narayana-Madapakula/Human-Gender-Tracking-Application/blob/main/application_ui/phase1.png)
+### **Results**
 #### Phase I
-![Phase I](https://github.com/Adi-Narayana-Madapakula/Human-Gender-Tracking-Application/blob/main/application_ui/phase1.png)
+![Result1](https://github.com/Adi-Narayana-Madapakula/Human-Gender-Tracking-Application/blob/main/results/phase1/res1.png)
+![Result2](https://github.com/Adi-Narayana-Madapakula/Human-Gender-Tracking-Application/blob/main/results/phase1/res2.png)
+![Result3](https://github.com/Adi-Narayana-Madapakula/Human-Gender-Tracking-Application/blob/main/results/phase1/res3.png)
 #### Phase II
-![Phase II](https://github.com/Adi-Narayana-Madapakula/Human-Gender-Tracking-Application/blob/main/application_ui/phase2.png)
+![Result1](https://github.com/Adi-Narayana-Madapakula/Human-Gender-Tracking-Application/blob/main/results/phase2/res1.png)
+![Result2](https://github.com/Adi-Narayana-Madapakula/Human-Gender-Tracking-Application/blob/main/results/phase2/res2.png)
+![Result3](https://github.com/Adi-Narayana-Madapakula/Human-Gender-Tracking-Application/blob/main/results/phase2/res3.png)
+![Result3](https://github.com/Adi-Narayana-Madapakula/Human-Gender-Tracking-Application/blob/main/results/phase2/res4.png)
 #### Phase III
-![Phase III](https://github.com/Adi-Narayana-Madapakula/Human-Gender-Tracking-Application/blob/main/application_ui/phase3.png)
+![Result1](https://github.com/Adi-Narayana-Madapakula/Human-Gender-Tracking-Application/blob/main/results/phase3/res1.png)
+![Result2](https://github.com/Adi-Narayana-Madapakula/Human-Gender-Tracking-Application/blob/main/results/phase3/res2.png)
+![Result3](https://github.com/Adi-Narayana-Madapakula/Human-Gender-Tracking-Application/blob/main/results/phase3/res3.png)
 
 ## **Applications**
 > * Track People in any sector
