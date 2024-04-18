@@ -1,70 +1,52 @@
-# -*- coding: utf-8 -*-
-"""
-@author: jai ganesh
-"""
-
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.models import load_model
 import cv2
 import numpy as np
 from mtcnn.mtcnn import MTCNN
 
-#creating object
-detector=MTCNN()
+class GenderDetector:
+    def __init__(self, model_path):
+        self.detector = MTCNN()
+        self.model = load_model(model_path)
+        self.classes = ['men', 'women']
+        self.males = 0
+        self.females = 0
 
+    def detect_gender(self, image_path):
+        image = cv2.imread(image_path)
+        faces = self.detector.detect_faces(image)
+        for face_data in faces:
+            x, y, w, h = face_data['box']
+            cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 3)
 
-#load model
-model = load_model("gender_predictor.model")
+            cropped_image = image[y:y+h, x:x+w]
+            resized_face = cv2.resize(cropped_image, (96, 96))
+            resized_face = resized_face.astype("float") / 255.0
+            resized_face = img_to_array(resized_face)
+            resized_face = np.expand_dims(resized_face, axis=0)
 
-#definig classes
-classes = ['men','women']
+            result = self.model.predict(resized_face)[0]
+            idx = np.argmax(result)
+            label = self.classes[idx]
 
-#pass input image
+            if label == "women":
+                self.females += 1
+            else:
+                self.males += 1
 
-image = cv2.imread("images/lion.jpg")
+        self._display_results(image, len(faces))
 
-faces=detector.detect_faces(image)
+    def _display_results(self, image, num_faces):
+        cv2.rectangle(image, (0, 0), (300, 30), (255, 255, 255), -1)
+        cv2.putText(image, " females = {}, males = {} ".format(self.females, self.males), (0, 15),
+                    cv2.FONT_HERSHEY_TRIPLEX, 0.6, (255, 101, 125), 1)
+        cv2.putText(image, " faces detected = " + str(num_faces), (10, 30), cv2.FONT_HERSHEY_TRIPLEX, 0.5, (0, 0, 0), 1)
 
+        cv2.imshow("Gender FaceCounter", image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
-#maintaining seperate counters
-males=0
-females=0
+if __name__ == "__main__":
+    gender_detector = GenderDetector("gender_predictor.model")
+    gender_detector.detect_gender("images/lion.jpg")
 
-# iterating over faces 
-
-for (x,y,w,h) in faces:
-    cv2.rectangle(image, (x,y), (x+w,y+h), (0,255,0),3)
-    
-    cropped_image = np.copy(image[y:y+h,x:x+w])
-
-    #preprocess the image according to our model
-    res_face = cv2.resize(cropped_image, (96,96))
-    #cv2.imshow("cropped image",res_face)
-    res_face = res_face.astype("float") / 255.0
-    res_face = img_to_array(res_face)
-    res_face = np.expand_dims(res_face, axis=0)
-    
-
-    #model prediction
-    result = model.predict(res_face)[0] 
-
-    # get label with max accuracy
-    idx = np.argmax(result)
-    label = classes[idx]
-    print("predicted label is =",label)
-
-    #calculating count
-
-    if label=="women":
-        females=females+1
-    else:
-        males=males+1
-
-cv2.rectangle(image,(0,0),(300,30),(255,255,255),-1)
-cv2.putText(image," females = {},males = {} ".format(females,males),(0,15),cv2.FONT_HERSHEY_TRIPLEX,0.6,(255, 101, 125),1)
-cv2.putText(image," faces detected = " + str(len(faces)),(10,30),cv2.FONT_HERSHEY_TRIPLEX,0.5,(0,0,0),1)
-    
-                                             
-cv2.imshow("Gender FaceCounter",image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
