@@ -1,5 +1,7 @@
 # **Human Gender Tracking Application**
 
+You can learn about this project with the complete step-by-step explanation on my <a href="https://dataaspirant.com/gender-wise-face-recognition-with-opencv/">blog</a>
+
 ## **Objectives**
 > * To detect the faces in a given image
 > * To detect the gender of the face detected
